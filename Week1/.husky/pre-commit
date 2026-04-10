@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Block .env
+if git diff --cached --name-only | grep -q ".env"; then
+  echo "❌ .env file detected"
+  exit 1
+fi
+
+# Ensure logs are ignored
+if ! grep -q "day5/logs/" .gitignore; then
+  echo "❌ day5/logs/ missing in .gitignore"
+  exit 1
+fi
+
+# Format JS files
+npx prettier --check "**/*.js"
+if [ $? -ne 0 ]; then
+  echo "❌ JS files not formatted"
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed"
+#!/bin/sh
+
+# Block .env anywhere
+if git diff --cached --name-only | grep -q ".env"; then
+  echo "❌ .env file detected"
+  exit 1
+fi
+
+# Ensure day5 logs are ignored
+if ! grep -q "day5/logs/" .gitignore; then
+  echo "❌ day5/logs/ missing in .gitignore"
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed"

@@ -1,0 +1,4 @@
+etag: W/"62a3c23abaad999a951c67cf86f0ab6e1e6658316f33248729a223a9e5acaf1d"
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset
+server: github.com
+x-ratelimit-remaining: 18
