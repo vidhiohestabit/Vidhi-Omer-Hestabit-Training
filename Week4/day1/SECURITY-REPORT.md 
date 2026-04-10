@@ -1,0 +1,111 @@
+# SECURITY REPORT
+
+## Overview
+This report summarizes all security and input validation tests performed for the backend APIs. The system includes the following protections:
+- Payload whitelisting
+- Schema-level validation (Joi)
+- Request throttling (express-rate-limit)
+- Header hardening (Helmet + CORS)
+- Query sanitization (express-mongo-sanitize)
+- XSS prevention (xss-clean)
+- Async jobs observability (BullMQ + structured logging)
+- Request tracing (X-Request-ID)
+
+---
+
+## 1. Input Validation Tests
+
+### POST /products
+**Test Payload:**
+```json
+{
+  "name": "ab",
+  "price": -100
+}
+
+Expected Result:
+Validation fails: name too short, price negative.
+
+Actual Result:
+
+{
+  "success": false,
+  "message": "\"price\" must be greater than or equal to 0, \"name\" length must be at least 3 characters long",
+  "code": "VALIDATION_ERROR",
+  "path": "/products",
+  "timestamp": "..."
+}
+
+✅ PASSED
+
+POST /users
+
+Test Payload:
+
+{
+  "username": "jd",
+  "email": "invalidemail",
+  "password": "123"
+}
+
+Result: Validation blocked invalid email & password rules
+✅ PASSED
+
+2. XSS Sanitization Test
+
+Test Payload:
+
+{
+  "name": "<script>alert('XSS')</script>",
+  "price": 10
+}
+
+Actual Result:
+
+{
+  "name": "alert('XSS')",
+  "price": 10,
+  ...
+}
+
+✅ PASSED — XSS sanitized, script removed
+
+3. NoSQL Injection Test
+
+Test Payload (POST /users):
+
+{
+  "username": {"$gt": ""},
+  "email": "abc@abc.com",
+  "password": "123456"
+}
+
+Actual Result: Rejected by express-mongo-sanitize
+✅ PASSED
+
+4. Rate Limiting Test
+
+Scenario: >100 requests to /products in 10 mins from same IP
+Actual Result:
+
+{
+  "message": "Too many requests from this IP, please try again later."
+}
+
+✅ PASSED
+
+5. Header Hardening
+
+Helmet applied (X-Frame-Options, X-DNS-Prefetch-Control, etc.)
+
+CORS enabled with proper origin restrictions
+✅ PASSED
+
+6. Async Worker & Tracing Verification (Day 5)
+
+Jobs processed in /jobs/email.job.js using BullMQ
+
+Logs show request IDs with X-Request-ID
+
+Job retries and backoff verified
+✅ PASSED
