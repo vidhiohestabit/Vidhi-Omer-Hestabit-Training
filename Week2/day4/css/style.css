@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f00c767c;
+}
+
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: rgb(223, 100, 212);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+input {
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
+  background: #f0ce0c73;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #f0ce0c73;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}

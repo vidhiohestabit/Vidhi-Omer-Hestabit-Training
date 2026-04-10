@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Fundamentals Blog</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Frontend Fundamentals</h1>
+      <p>HTML, CSS & JavaScript explained in simple terms</p>
+
+      <nav>
+        <ul>
+          <li><a href="#html">HTML</a></li>
+          <li><a href="#css">CSS</a></li>
+          <li><a href="#js">JavaScript</a></li>
+          <li><a href="#subscribe">Subscribe</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ================= HTML ================= -->
+      <section id="html">
+        <h2>HTML – Semantic Structure & Accessibility</h2>
+
+        <figure>
+          <img
+            src="html.jpg"
+            width="800"
+            height="300"
+            alt="Semantic HTML page structure"
+          />
+          <figcaption>Semantic HTML5 Layout</figcaption>
+        </figure>
+
+        <article>
+          <ul>
+            <li>
+              <strong>Semantic HTML5 Structure</strong>
+              <ul>
+                <li>Uses meaningful tags instead of divs</li>
+                <li>Improves accessibility and SEO</li>
+                <li>Makes code readable and structured</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Forms, Validation & Accessibility</strong>
+              <ul>
+                <li>Forms collect user input</li>
+                <li>HTML validation prevents wrong data</li>
+                <li>Labels and ARIA improve accessibility</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Canvas & Media</strong>
+              <ul>
+                <li>Canvas is used for drawings</li>
+                <li>Video embeds media content</li>
+                <li>Audio plays sound files</li>
+              </ul>
+
+              <video controls width="300">
+                <source src="video.mp4" type="video/mp4" />
+              </video>
+
+              <audio controls>
+                <source src="audio.mp3" type="audio/mpeg" />
+              </audio>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ================= CSS ================= -->
+      <section id="css">
+        <h2>CSS – Styling & Layout</h2>
+
+        <figure>
+          <img
+            src="css.jpg"
+            width="800"
+            height="300"
+            alt="CSS box model diagram"
+          />
+          <figcaption>CSS Box Model</figcaption>
+        </figure>
+
+        <article>
+          <ul>
+            <li>
+              <strong>CSS Selectors</strong>
+              <ul>
+                <li>Attribute selectors target attributes</li>
+                <li>Sibling selectors target related elements</li>
+                <li>nth-child selects by position</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Box Model & Units</strong>
+              <ul>
+                <li>Content, padding, border, margin</li>
+                <li>rem for scalable text</li>
+                <li>vw and vh for responsive sizing</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Flexbox, Grid & Responsive Design</strong>
+              <ul>
+                <li>Flexbox handles 1D layouts</li>
+                <li>Grid handles 2D layouts</li>
+                <li>Mobile-first approach</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Animations & Transitions</strong>
+              <ul>
+                <li>Transitions animate property changes</li>
+                <li>Animations use keyframes</li>
+                <li>Enhance user experience</li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ================= JS ================= -->
+      <section id="js">
+        <h2>JavaScript – ES6+ Fundamentals</h2>
+
+        <figure>
+          <img
+            src="javascript.jpg"
+            width="800"
+            height="300"
+            alt="JavaScript DOM manipulation"
+          />
+          <figcaption>JavaScript Interactivity</figcaption>
+        </figure>
+
+        <article>
+          <ul>
+            <li>
+              <strong>let vs const</strong>
+              <ul>
+                <li>let allows reassignment</li>
+                <li>const prevents reassignment</li>
+                <li>Both are block scoped</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Arrays & Objects</strong>
+              <ul>
+                <li>Arrays store ordered data</li>
+                <li>Objects store key-value pairs</li>
+                <li>map, filter, reduce transform data</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Modern ES6 Features</strong>
+              <ul>
+                <li>Arrow functions</li>
+                <li>Destructuring</li>
+                <li>Spread operator</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>DOM Manipulation & Events</strong>
+              <ul>
+                <li>DOM represents page structure</li>
+                <li>JavaScript updates HTML dynamically</li>
+                <li>Event listeners handle user actions</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Modular JavaScript</strong>
+              <ul>
+                <li>Code is split into modules</li>
+                <li>Functions are reusable</li>
+                <li>Improves maintainability</li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+      </section>
+      <!-- ================= FORM ================= -->
+      <section id="subscribe">
+        <h2>Subscribe to the Blog</h2>
+
+        <form>
+          <label for="email">Email address:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            aria-required="true"
+          />
+
+          <button type="submit">Subscribe</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Frontend Fundamentals Blog</p>
+    </footer>
+  </body>
+</html>
