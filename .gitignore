@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# Data
+data/
+datasets/
+*.csv
+*.json
+
+# Models
+models/
+*.bin
+*.pt
+*.gguf
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# Data
+data/
+datasets/
+*.csv
+*.json
+
+# Models
+models/
+*.bin
+*.pt
+*.gguf
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# System
+.DS_Store
