@@ -1,0 +1,22 @@
+# Data & analysis
+pandas
+matplotlib
+tqdm
+pyyaml
+
+# LLM & training
+transformers
+accelerate
+bitsandbytes
+peft
+trl
+
+# Inference & deployment
+llama-cpp-python
+fastapi
+uvicorn
+pydantic
+requests
+
+# UI
+streamlit

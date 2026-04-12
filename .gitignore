@@ -1,7 +1,7 @@
 # Python
 __pycache__/
 *.pyc
-.venv/
+*venv/
 env/
 
 # Data
@@ -48,3 +48,6 @@ logs/
 
 # System
 .DS_Store
+
+Week8/day5/model
+Week8/day3/quantized
