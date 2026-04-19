@@ -1,0 +1,9 @@
+autogen-core
+autogen-ext
+sentence-transformers
+faiss-cpu
+python-dotenv
+numpy
+autogen_agentchat
+dotenv
+autogen-ext[groq]

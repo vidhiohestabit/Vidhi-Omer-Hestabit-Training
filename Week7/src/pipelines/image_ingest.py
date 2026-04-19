@@ -55,7 +55,7 @@ def ingest():
 
     dim = len(embeddings[0])
     index = faiss.IndexFlatL2(dim)
-    embeddings = np.array(embeddings).astype("float32")  # 🔥 FIX
+    embeddings = np.array(embeddings).astype("float32")  
     index.add(embeddings)
 
     faiss.write_index(index, f"{VECTOR_PATH}/index.faiss")
