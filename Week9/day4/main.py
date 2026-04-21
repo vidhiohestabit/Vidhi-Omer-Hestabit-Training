@@ -10,7 +10,8 @@ from memory.vector_store import VectorStore
 from memory.long_term import LongTermMemory
 
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env"))
-
+print("DEBUG KEY:", os.getenv("OPENAI_API_KEY"))
+print("DEBUG MODEL:", os.getenv("MODEL_NAME"))
 
 class MemoryAgentSystem:
 

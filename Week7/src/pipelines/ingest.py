@@ -94,10 +94,10 @@ def query_loop(index, embeddings, model):
             break
 
         # Encode query
-        query_vec = model.encode(user_query).reshape(1, -1)
+        query_vec = model.encode(user_query).reshape(1, -1) #reshape used for converting to 2D vector
 
         # Search top 5 chunks
-        D, I = index.search(query_vec.astype("float32"), 5)  # D = distances, I = indices
+        D, I = index.search(query_vec.astype("float32"), 5)  # D = distances, I = indices search top 5 similar vectors
 
         print("\nResults:")
         for idx, dist in zip(I[0], D[0]):

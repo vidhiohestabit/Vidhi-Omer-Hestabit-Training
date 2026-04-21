@@ -7,3 +7,5 @@ numpy
 autogen_agentchat
 dotenv
 autogen-ext[groq]
+openai
+tiktoken

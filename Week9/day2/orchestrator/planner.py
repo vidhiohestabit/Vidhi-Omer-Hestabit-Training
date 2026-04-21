@@ -49,7 +49,7 @@ Step 2: ...
 """
 
         response = await self.model.create(
-            messages=[UserMessage(content=prompt, source="user")]
+            messages=[UserMessage(content=prompt, source="user")]           #sending prompt to llm
         )
 
         steps = response.content.strip().split("\n")
@@ -63,10 +63,10 @@ Step 2: ...
         tasks = []
 
         for step in steps:
-            # ✅ PASS query ALSO
+            
             tasks.append(self.worker.run(step, query))
 
-        results = await asyncio.gather(*tasks)
+        results = await asyncio.gather(*tasks)                                  # runs all workers in parallel and waits for results
         return results
 
     # -------------------------
