@@ -1,4 +1,9 @@
 import os
+import sys
+
+# Fix import path: allow imports from the parent `day3/` directory
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
 from autogen_agentchat.messages import TextMessage
 from autogen_agentchat.agents import AssistantAgent
 from autogen_ext.models.openai import OpenAIChatCompletionClient
@@ -33,12 +38,18 @@ def create_router():
     system_prompt = """
 You are a Router Agent.
 
-Classify the user request into ONE or MORE categories:
+Classify the user request into ONE of these categories:
 
-- code  → Python execution, calculations, statistics
-- file  → reading/writing .txt or .csv files
-- db    → SQL queries, analytics on structured data
+- code     → Python execution, calculations, statistics
+- file     → reading, summarizing, highlighting, extracting keypoints from .txt or .csv files by their content
+- db       → SQL queries, analytics on structured/sales data
 - combined → requires file + db + code together (e.g., "analyze sales.csv and give insights")
+
+IMPORTANT RULES:
+- If the user asks to summarize, highlight, extract keypoints, or read a .txt file → always reply: file
+- If the user asks about sales data, products, prices, queries → reply: db
+- If the user asks to run code, compute stats, do calculations → reply: code
+- Only use combined if the request EXPLICITLY needs database AND file AND code together
 
 Reply ONLY with one of: code | file | db | combined
 """
