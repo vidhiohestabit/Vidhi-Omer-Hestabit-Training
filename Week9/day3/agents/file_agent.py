@@ -1,4 +1,5 @@
 import os
+import json
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from autogen_core.models import UserMessage
 from tools.file_agent import read_csv, write_csv, read_txt, write_txt
@@ -52,7 +53,7 @@ Classify the user request into a JSON object with these fields:
 Rules:
 - Return ONLY valid JSON, no explanation, no markdown
 - If user says "give me data", "show csv", "display file", "get csv" → action = "read_csv"
-- If user says "show txt", "read text file" → action = "read_txt"
+- If user says "show txt", "read text file", "summarize txt", "highlight", "keypoints" → action = "read_txt"
 - If user says "write" or "save" → action = "write_txt" or "write_csv"
 - Default file is "sales.csv" unless user mentions .txt
 
@@ -69,12 +70,40 @@ JSON:
     raw = response.content.strip()
     raw = raw.replace("```json", "").replace("```", "").strip()
 
-    import json
     try:
         return json.loads(raw)
     except Exception:
-        # ✅ Safe fallback — if JSON parse fails, default to read_csv
         return {"action": "read_csv", "filename": "sales.csv", "content": None}
+
+
+# -------------------------------
+#  ANSWER AGENT — filters and answers from raw data
+# -------------------------------
+async def answer_from_data(user_query: str, raw_data) -> str:
+    """Pass raw file data + user question to LLM to get a proper filtered answer."""
+
+    prompt = f"""
+You are a data assistant.
+
+The user asked: "{user_query}"
+
+Here is the raw file data:
+{raw_data}
+
+Instructions:
+- Answer the user's question using ONLY the data above
+- If the user asks to filter (e.g. by category, price, etc.), filter and return ONLY matching results
+- Be concise and specific — do NOT dump all the data
+- Format the answer clearly (e.g. a list of product names if asked for products)
+- Do case-insensitive comparison when filtering (e.g. "electronics" == "Electronics")
+"""
+
+    client = get_model_client()
+    response = await client.create(
+        messages=[UserMessage(content=prompt, source="user")]
+    )
+
+    return response.content.strip()
 
 
 # -------------------------------
@@ -91,21 +120,30 @@ async def run_file_agent(task: str):
 
     print(f"[FILE AGENT] Intent → action={action}, file={filename}")
 
-    # ✅ Build correct path
     filepath = f"data/{filename}"
 
     if action == "read_csv":
         try:
-            data = read_csv(filepath)
-            return data
+            raw_data = read_csv(filepath)
         except FileNotFoundError:
             return f"❌ File not found: {filepath}"
 
+        # ✅ If this is an internal call (e.g. from handle_combined), return raw data
+        # ✅ If user asked a question, answer it properly
+        if task.strip().lower() in ["read sales.csv", "read csv", "get csv data"]:
+            return raw_data  # raw list for combined handler
+
+        # Otherwise — answer the user's actual question
+        return await answer_from_data(task, raw_data)
+
     elif action == "read_txt":
         try:
-            return read_txt(filepath)
+            raw_data = read_txt(filepath)
         except FileNotFoundError:
             return f"❌ File not found: {filepath}"
+
+        # ✅ Answer based on user's question about the txt file
+        return await answer_from_data(task, raw_data)
 
     elif action == "write_txt":
         write_txt(filepath, content or "Hello from agent")

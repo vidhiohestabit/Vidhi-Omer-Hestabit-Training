@@ -8,7 +8,7 @@ DB = "data/sales.db"
 # -------------------------------
 #  LLM CLIENT — lazy init
 # -------------------------------
-_model_client = None  # NOT initialized at import time
+_model_client = None
 
 
 def get_model_client():
@@ -107,6 +107,8 @@ Columns: {schema}
 Rules:
 - Only generate SELECT queries
 - Use correct column names
+- ALWAYS use LOWER() for case-insensitive string comparisons
+  Example: WHERE LOWER(category) = LOWER('Electronics')
 - Do not explain anything
 - Do not add markdown or code fences
 - Return ONLY the raw SQL query
@@ -114,15 +116,13 @@ Rules:
 User Request: {user_query}
 """
 
-    client = get_model_client()  # ✅ lazy — safe after load_dotenv()
+    client = get_model_client()
 
     response = await client.create(
         messages=[UserMessage(content=prompt, source="user")]
     )
 
     sql_query = response.content.strip()
-
-    # ✅ Strip markdown fences if LLM ignores instructions
     sql_query = sql_query.replace("```sql", "").replace("```", "").strip()
 
     return sql_query
@@ -139,7 +139,7 @@ async def run_query(user_query: str):
 
     print(f"[GENERATED SQL]: {sql_query}")
 
-    # 🔐 Safety check — only SELECT allowed
+    # Safety check — only SELECT allowed
     if not sql_query.lower().startswith("select"):
         return "❌ Only SELECT queries are allowed"
 
