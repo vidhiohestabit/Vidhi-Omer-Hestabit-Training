@@ -98,7 +98,7 @@ class NexusAI:
     # -------------------------
     def handle_personal_query(self, query: str) -> str:
         """Answer user questions about themselves using stored long-term memory."""
-        facts = self.long_term_memory.get_all_facts()
+        facts = self.long_term_memory.retrieve_all()
 
         if not facts:
             return (

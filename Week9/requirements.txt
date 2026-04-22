@@ -9,3 +9,4 @@ dotenv
 autogen-ext[groq]
 openai
 tiktoken
+streamlit
