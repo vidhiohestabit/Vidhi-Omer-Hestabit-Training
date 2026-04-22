@@ -78,7 +78,7 @@ Reply only: yes or no
         past = self.long_term_memory.retrieve_all()
         long_term_context = "\n".join(past[-5:]) if past else ""
 
-        # 🔥 CLEAN PROMPT
+        # CLEAN PROMPT
         prompt = f"""
 You are a helpful conversational AI.
 

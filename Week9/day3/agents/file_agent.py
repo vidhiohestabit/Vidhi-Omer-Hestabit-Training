@@ -4,7 +4,7 @@ from autogen_core.models import UserMessage
 from tools.file_agent import read_csv, write_csv, read_txt, write_txt
 
 # -------------------------------
-# 🔹 LLM CLIENT — lazy init
+#  LLM CLIENT — lazy init
 # -------------------------------
 _model_client = None
 
@@ -15,7 +15,7 @@ def get_model_client():
         api_key = os.getenv("OPENAI_API_KEY")
 
         if not model_name or not api_key:
-            raise ValueError("❌ MODEL_NAME or OPENAI_API_KEY not set.")
+            raise ValueError("MODEL_NAME or OPENAI_API_KEY not set.")
 
         _model_client = OpenAIChatCompletionClient(
             model=model_name,
@@ -36,7 +36,7 @@ def get_model_client():
 
 
 # -------------------------------
-# 🔹 NL → FILE INTENT (ASYNC)
+#  NL → FILE INTENT (ASYNC)
 # -------------------------------
 async def nl_to_file_intent(user_query: str) -> dict:
     """Use LLM to understand what file operation the user wants."""
@@ -78,7 +78,7 @@ JSON:
 
 
 # -------------------------------
-# 🔹 MAIN FILE AGENT (ASYNC)
+#  MAIN FILE AGENT (ASYNC)
 # -------------------------------
 async def run_file_agent(task: str):
 

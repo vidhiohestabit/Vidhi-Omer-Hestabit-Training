@@ -6,7 +6,7 @@ from autogen_core.models import UserMessage
 
 
 # -------------------------------
-# 🔹 LLM CLIENT — lazy init (fixes import-time crash)
+#  LLM CLIENT — lazy init (fixes import-time crash)
 # -------------------------------
 _model_client = None  
 
@@ -71,14 +71,14 @@ User Request: {user_query}
 
     code = response.content.strip()
 
-    # ✅ Strip markdown fences if LLM ignores instructions
+    # Strip markdown fences if LLM ignores instructions
     code = code.replace("```python", "").replace("```", "").strip()
 
     return code
 
 
 # -------------------------------
-# 🔹 EXECUTE PYTHON CODE (SYNC)
+#  EXECUTE PYTHON CODE (SYNC)
 # -------------------------------
 def execute_code(code: str) -> str:
     """Directly execute a raw Python code string. Used by nexus.py."""
@@ -93,11 +93,11 @@ def execute_code(code: str) -> str:
         return result if result else "✅ Code executed successfully (no output)"
 
     except Exception as e:
-        return f"❌ Execution Error: {e}"
+        return f"Execution Error: {e}"
 
 
 # -------------------------------
-# 🔹 MAIN ENTRY — NL → CODE → EXECUTE (ASYNC)
+#  MAIN ENTRY — NL → CODE → EXECUTE (ASYNC)
 # -------------------------------
 async def run_code_executor(user_query: str) -> str:
     """Full pipeline: natural language → generate code → execute it."""

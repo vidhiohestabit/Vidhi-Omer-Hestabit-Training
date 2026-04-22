@@ -5,7 +5,7 @@ class ValidatorAgent:
     def __init__(self, model):
         self.model = model
 
-    async def run(self, answer, query):   # ✅ FIXED (added query)
+    async def run(self, answer, query):   # FIXED (added query)
 
         prompt = f"""
 You are a validator.

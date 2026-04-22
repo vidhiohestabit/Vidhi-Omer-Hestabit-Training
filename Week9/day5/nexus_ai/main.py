@@ -11,7 +11,7 @@ def main():
             if q.lower() in ["exit", "quit"]:
                 break
 
-            # 🔥 capture result
+            
             system.run(q)
 
 

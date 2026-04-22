@@ -19,7 +19,7 @@ from openai import OpenAI
 from tools.code_executor import execute_code
 from tools.file_agent import write_txt, write_md
 
-# MEMORY (your existing day4 files — untouched)
+# MEMORY 
 from memory.session_memory import SessionMemory
 from memory.long_term import LongTermMemory
 
@@ -67,7 +67,7 @@ class NexusAI:
     def route(self, query: str):
         q = query.lower()
 
-        # Personal memory questions — answered from memory, no model call needed
+        # Personal memory 
         personal_triggers = [
             "what is my name", "what's my name", "my name",
             "who am i", "do you know me", "do you remember me",

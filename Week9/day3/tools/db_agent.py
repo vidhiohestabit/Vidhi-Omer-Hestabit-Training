@@ -6,9 +6,9 @@ from autogen_core.models import UserMessage
 DB = "data/sales.db"
 
 # -------------------------------
-# 🔹 LLM CLIENT — lazy init
+#  LLM CLIENT — lazy init
 # -------------------------------
-_model_client = None  # ✅ NOT initialized at import time
+_model_client = None  # NOT initialized at import time
 
 
 def get_model_client():
@@ -45,7 +45,7 @@ def get_model_client():
 
 
 # -------------------------------
-# 🔹 CREATE TABLE FROM CSV
+#  CREATE TABLE FROM CSV
 # -------------------------------
 def create_table_from_csv(data):
 
@@ -74,7 +74,7 @@ def create_table_from_csv(data):
 
 
 # -------------------------------
-# 🔹 GET TABLE SCHEMA
+#  GET TABLE SCHEMA
 # -------------------------------
 def get_schema():
 
@@ -89,7 +89,7 @@ def get_schema():
 
 
 # -------------------------------
-# 🔹 NL → SQL (ASYNC)
+#  NL → SQL (ASYNC)
 # -------------------------------
 async def nl_to_sql(user_query: str) -> str:
 
@@ -129,7 +129,7 @@ User Request: {user_query}
 
 
 # -------------------------------
-# 🔹 RUN QUERY (ASYNC)
+#  RUN QUERY (ASYNC)
 # -------------------------------
 async def run_query(user_query: str):
 

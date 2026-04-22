@@ -1,7 +1,7 @@
 import os
 import sys
 
-# Fix import path: allow imports from the parent `day3/` directory
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from autogen_agentchat.messages import TextMessage
@@ -110,7 +110,7 @@ class Day3Planner:
             await self.handle_combined(user_input)
 
         else:
-            print("❌ Could not classify request.")
+            print("Could not classify request.")
 
     # ── Individual handlers ──────────────────────────────────────
 
@@ -137,11 +137,11 @@ class Day3Planner:
 
         # Step 1: File Agent — load raw CSV data
         file_result = await run_file_agent("read sales.csv")
-        print(f"[FILE AGENT] ✅ Got {len(file_result)} rows")
+        print(f"[FILE AGENT] Got {len(file_result)} rows")
 
         # Step 2: DB Agent — run analytics query
         db_result = await run_db_agent(user_input)
-        print(f"[DB AGENT] ✅ Query complete")
+        print(f"[DB AGENT]  Query complete")
 
         # Step 3: Code Agent — compute stats
         code_task = f"""
