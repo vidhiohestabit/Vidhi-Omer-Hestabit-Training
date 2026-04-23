@@ -1,0 +1,47 @@
+def generate_fibonacci(n):
+    """
+    Generate the Fibonacci series up to the nth number.
+    
+    Args:
+    n (int): The number of Fibonacci numbers to generate.
+    
+    Returns:
+    list: A list of Fibonacci numbers.
+    """
+    # Base cases to avoid unnecessary computation
+    if n <= 0:
+        # Return an empty list if n is less than or equal to 0
+        return []
+    elif n == 1:
+        # Return a list containing 0 if n is 1
+        return [0]
+    elif n == 2:
+        # Return a list containing 0 and 1 if n is 2
+        return [0, 1]
+    else:
+        # Initialize a list with the first two Fibonacci numbers
+        fib_series = [0, 1]
+        
+        # Generate the Fibonacci series up to the nth number
+        for i in range(2, n):
+            # Append the sum of the last two numbers in the list
+            fib_series.append(fib_series[i-1] + fib_series[i-2])
+        
+        # Return the generated Fibonacci series
+        return fib_series
+
+def print_fibonacci_info():
+    # Example usage
+    n = 10
+    fib_series = generate_fibonacci(n)
+    
+    # Print the generated Fibonacci series
+    print("Fibonacci series up to", n, "numbers:")
+    print(fib_series)
+
+    # Print the length and last element of the Fibonacci series
+    print("\nLength of the Fibonacci series:", len(fib_series))
+    print("Last element of the Fibonacci series:", fib_series[-1])
+
+# Call the function to print Fibonacci information
+print_fibonacci_info()
